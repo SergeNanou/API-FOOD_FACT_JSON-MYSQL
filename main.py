@@ -1,6 +1,6 @@
 import requests
 
-payload = {"search_terms": "Snacks","search_tag": "categories","page_size": 1000, "json": 1}
+payload = {"search_terms": "pizza","search_tag": "categories","page_size": 1, "json": 1}
 res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
 
 # l'url correspondante
@@ -11,8 +11,9 @@ results = res.json()
 products = results["products"]
 #stores = results["stores"]
 print(len(products))
+#print(products[0]["ingredients_text_fr"])
 # Et afficher leurs noms
-#for product in products:
+for product in products:
     #print(product.keys())
-    #print(product["ingredients_text_fr"])
+    print(product["product_name"])
 
