@@ -5,50 +5,51 @@ USE Pure_beure;
 
 CREATE TABLE Category (
     id SMALLINT   PRIMARY KEY,
-    nom_category VARCHAR(1000) NOT NULL
+    name_category VARCHAR(1000) NOT NULL
 
 )
 ENGINE=InnoDB;
 
 
 
-CREATE TABLE Produit (
+CREATE TABLE Product (
     code_bar BIGINT  PRIMARY KEY,
-    nom_produit VARCHAR(100) NOT NULL,
+    name_product VARCHAR(100) NOT NULL,
     
     description VARCHAR(1000),
     
-    url VARCHAR(1000)
+    url VARCHAR(1000),
+    nutrition_score VARCHAR(1)
      
 )
 ENGINE=InnoDB;
 
-CREATE TABLE Categorie_Produit (
+CREATE TABLE Categorie_Product (
     categorie_id SMALLINT   REFERENCES Category(id),
-    produit_code_bar BIGINT  REFERENCES Produit(code_bar),
-    PRIMARY KEY (categorie_id, produit_code_bar)
+    product_code_bar BIGINT  REFERENCES Product(code_bar),
+    PRIMARY KEY (categorie_id, product_code_bar)
 )
 ENGINE=InnoDB;
 
 CREATE TABLE Substitut (
     id SMALLINT  UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nom_produit VARCHAR(100) NOT NULL,
-    produit_substitut VARCHAR(100) NOT NULL
+    name_produit VARCHAR(100) NOT NULL,
+    product_substitut VARCHAR(100) NOT NULL
     
 )
 ENGINE=InnoDB;
 
-CREATE TABLE Magasin (
+CREATE TABLE Shop (
     id SMALLINT   PRIMARY KEY,
-    nom_magasin VARCHAR(100) NOT NULL
+    name_shop VARCHAR(100) NOT NULL
     
 )
 ENGINE=InnoDB;
 
-CREATE TABLE Produit_Magasin(
-    magasin_id SMALLINT   REFERENCES Magasin(id),
-    produit_code_bar BIGINT REFERENCES Produit(code_bar),
-     PRIMARY KEY (magasin_id, produit_code_bar)
+CREATE TABLE Product_shop(
+    shop_id SMALLINT   REFERENCES Shop(id),
+    product_code_bar BIGINT REFERENCES Product(code_bar),
+     PRIMARY KEY (shop_id, product_code_bar)
     
 )
 ENGINE=InnoDB;
