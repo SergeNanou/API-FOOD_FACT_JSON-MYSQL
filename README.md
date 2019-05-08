@@ -7,7 +7,7 @@ Creation d'un tableau agile(TRELLO) et affectation  des deadlines.
 # 2 - Construction la base de données
 -Creation d'une base de données contennant 6 tables
 
--Recupération de la donnée  sous format jsonavec l'API d'Openfoodfacts
+-Recupération de la donnée  sous format json avec l'API d'Openfoodfacts
 
 -Insertion dans la base de donnée de la donnée
 
