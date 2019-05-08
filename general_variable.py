@@ -24,5 +24,6 @@ class GestionBD:
 			'Erreur détectée :\n%s' % err)
 			self.echec =1
 		else:    
-			self.cursor = self.baseDonn.cursor()   # création du curseur
+			self.cursor = self.baseDonn.cursor(buffered=True)   # création du curseur
+			
 			self.echec =0

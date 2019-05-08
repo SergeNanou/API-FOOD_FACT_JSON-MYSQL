@@ -5,7 +5,7 @@ USE Pure_beure;
 
 CREATE TABLE Category (
     id SMALLINT   PRIMARY KEY,
-    name_category VARCHAR(1000) NOT NULL
+    name_category VARCHAR(255) NOT NULL
 
 )
 ENGINE=InnoDB;

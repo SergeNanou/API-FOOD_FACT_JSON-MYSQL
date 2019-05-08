@@ -5,8 +5,9 @@ class Substitut:
 		
 		self.bd = bd
 		self.table = table
+	# Method to create a Product table
 	def create(self):
-		statement =  ['DROP TABLE IF EXISTS %s','CREATE TABLE %s (id SMALLINT  UNSIGNED AUTO_INCREMENT PRIMARY KEY,name_produit VARCHAR(100) NOT NULL,product_substitut VARCHAR(100) NOT NULL)']
+		statement =  ['DROP TABLE IF EXISTS %s','CREATE TABLE %s (id SMALLINT  UNSIGNED AUTO_INCREMENT PRIMARY KEY,name_product TEXT NOT NULL,product_substitut TEXT NOT NULL)']
 		
 		for sql_insert_query in statement:
 			if len(statement) > 0:
