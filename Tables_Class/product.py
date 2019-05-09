@@ -11,8 +11,7 @@ class Product:
 		self.table = table
 	# Method to create a Product table
 	def create(self):
-		statement =  ['DROP TABLE IF EXISTS %s','CREATE TABLE %s (code_bar BIGINT  PRIMARY KEY,name_product TEXT,description TEXT,url  TEXT,nutrition_score CHAR(10))']
-		
+		statement =  ['CREATE TABLE IF NOT EXISTS %s (code_bar BIGINT  PRIMARY KEY,name_product TEXT,description TEXT,url  TEXT,nutrition_score CHAR(10))']
 		for sql_insert_query in statement:
 			if len(statement) > 0:
 				self.bd.cursor.execute(sql_insert_query%(self.table))
@@ -52,4 +51,4 @@ class Product:
 							result  = self.bd.cursor.execute(sql_insert_query)
 				
    
-			print (self.bd.cursor.rowcount, "Record inserted successfully into product table")
+			#print (self.bd.cursor.rowcount, "Record inserted successfully into product table")

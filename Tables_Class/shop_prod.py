@@ -8,7 +8,7 @@ class Shop_prod:
 		self.table = table
 	#Class method to create shop_ptroduct table
 	def create(self):
-		statement =  ['DROP TABLE IF EXISTS %s','CREATE TABLE %s (shop_id SMALLINT   REFERENCES Shop(id),product_code_bar BIGINT REFERENCES Product(code_bar),PRIMARY KEY (shop_id, product_code_bar))']
+		statement =  ['CREATE TABLE IF NOT EXISTS %s (shop_id SMALLINT   REFERENCES Shop(id),product_code_bar BIGINT REFERENCES Product(code_bar),PRIMARY KEY (shop_id, product_code_bar))']
 		
 		for sql_insert_query in statement:
 			if len(statement) > 0:
@@ -46,5 +46,5 @@ class Shop_prod:
 						sql_insert_query = """ REPLACE INTO Shop_product (shop_id, product_code_bar) VALUES (%s, %s) """ %(id_store,code)
 						result  = self.bd.cursor.execute(sql_insert_query)
 				
-			print (self.bd.cursor.rowcount, "Record inserted successfully into shop_prod table")
+			#print (self.bd.cursor.rowcount, "Record inserted successfully into shop_prod table")
 	

@@ -10,7 +10,7 @@ class Cat_prod:
 		self.table = table
 	# Method to create a Product table
 	def create(self):
-		statement =  ['DROP TABLE IF EXISTS %s','CREATE TABLE %s (categorie_id SMALLINT   REFERENCES Category(id),product_code_bar BIGINT  REFERENCES Product(code_bar),PRIMARY KEY (categorie_id, product_code_bar))']
+		statement =  ['CREATE TABLE IF NOT EXISTS %s (categorie_id SMALLINT   REFERENCES Category(id),product_code_bar BIGINT  REFERENCES Product(code_bar),PRIMARY KEY (categorie_id, product_code_bar))']
 		
 		for sql_insert_query in statement:
 			if len(statement) > 0:
@@ -50,6 +50,5 @@ class Cat_prod:
 						# request to insert data recovered in category_product table 
 						sql_insert_query = """ REPLACE INTO Category_product (categorie_id, product_code_bar) VALUES (%s, %s) """ %(cat,code)
 						result  = self.bd.cursor.execute(sql_insert_query)
-				#print(code, cat)
-   
-			print (self.bd.cursor.rowcount, "Record inserted successfully into cat_prod table")
+				
+			#print (self.bd.cursor.rowcount, "Record inserted successfully into cat_prod table")
