@@ -9,12 +9,12 @@ Creation d'un tableau agile(TRELLO) et affectation  des deadlines.
 
 -Recupération de la donnée  sous format json avec l'API d'Openfoodfacts
 
--Insertion dans la base de donnée de la donnée
+-Insertion dans la base de donnée 
 
 # 3- Construction du programme
 -Programmation objet python
 
--Chaque table correspondant à une classe de programme
+-Chaque table correspondant à une classe du programme
 
 -Chaque classe disposant de la méthode Create et Insert
 
