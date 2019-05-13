@@ -11,7 +11,9 @@ class Product:
 		self.table = table
 	# Method to create a Product table
 	def create(self):
-		statement =  ['CREATE TABLE IF NOT EXISTS %s (code_bar BIGINT  PRIMARY KEY,name_product TEXT,description TEXT,url  TEXT,nutrition_score CHAR(10))']
+		statement =  ['CREATE TABLE IF NOT EXISTS %s \
+                      (code_bar BIGINT  PRIMARY KEY,name_product TEXT,\
+                      description TEXT,url  TEXT,nutrition_score CHAR(10))']
 		for sql_insert_query in statement:
 			if len(statement) > 0:
 				self.bd.cursor.execute(sql_insert_query%(self.table))
@@ -23,8 +25,10 @@ class Product:
 		# Openfoodfacts API request to take a data for category types
 		for search_term in search:
 		
-			payload = {"search_terms": search_term,"search_tag": "categories","page_size": 1000, "json": 1}
-			res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
+			payload = {"search_terms": search_term,"search_tag": 
+                       "categories","page_size": 1000, "json": 1}
+			res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", 
+                               params=payload)
 			# url result 
 			res.url
 			liste_store = []
@@ -47,7 +51,10 @@ class Product:
 						store = product['stores']
 						if code != '' and nutri != '' and prod != '' and url != '' and ingred != '' and store != '':
 							# request to insert data recovered in product table 
-							sql_insert_query = """ REPLACE  INTO Product (code_bar, name_product, description, url, nutrition_score) VALUES ('%s', '%s','%s','%s','%s') """ %(code,prod,ingred,url, nutri)
+							sql_insert_query = """ REPLACE  INTO Product \
+                                               (code_bar, name_product, description, \
+                                               url, nutrition_score) VALUES \
+                                               ('%s', '%s','%s','%s','%s') """ %(code,prod,ingred,url, nutri)
 							result  = self.bd.cursor.execute(sql_insert_query)
 				
    

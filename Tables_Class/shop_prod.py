@@ -8,7 +8,10 @@ class Shop_prod:
 		self.table = table
 	#Class method to create shop_ptroduct table
 	def create(self):
-		statement =  ['CREATE TABLE IF NOT EXISTS %s (shop_id SMALLINT   REFERENCES Shop(id),product_code_bar BIGINT REFERENCES Product(code_bar),PRIMARY KEY (shop_id, product_code_bar))']
+		statement =  ['CREATE TABLE IF NOT EXISTS \
+                      %s (shop_id SMALLINT   REFERENCES Shop(id),\
+                      product_code_bar BIGINT REFERENCES Product(code_bar)\
+                      ,PRIMARY KEY (shop_id, product_code_bar))']
 		
 		for sql_insert_query in statement:
 			if len(statement) > 0:

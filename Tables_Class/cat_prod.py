@@ -10,7 +10,11 @@ class Cat_prod:
 		self.table = table
 	# Method to create a Product table
 	def create(self):
-		statement =  ['CREATE TABLE IF NOT EXISTS %s (categorie_id SMALLINT   REFERENCES Category(id),product_code_bar BIGINT  REFERENCES Product(code_bar),PRIMARY KEY (categorie_id, product_code_bar))']
+		statement =  ['CREATE TABLE IF NOT EXISTS \
+                      %s (categorie_id SMALLINT   REFERENCES \
+                      Category(id),product_code_bar BIGINT \
+                      REFERENCES Product(code_bar),\
+                      PRIMARY KEY (categorie_id, product_code_bar))']
 		
 		for sql_insert_query in statement:
 			if len(statement) > 0:
@@ -32,8 +36,10 @@ class Cat_prod:
 			if search_term == 'pizza':
 				cat = 5
 			# Openfoodfacts API request to take a data for category types
-			payload = {"search_terms": search_term,"search_tag": "categories","page_size": 1000, "json": 1}
-			res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
+			payload = {"search_terms": search_term,"search_tag"
+                       : "categories","page_size": 1000, "json": 1}
+			res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", 
+                               params=payload)
 
 			# # url result 
 			res.url
@@ -48,7 +54,9 @@ class Cat_prod:
 					if 'url' in product.keys() and 'code' in product.keys() and 'ingredients_text_fr' in product.keys():
 						code = product['code']
 						# request to insert data recovered in category_product table 
-						sql_insert_query = """ REPLACE INTO Category_product (categorie_id, product_code_bar) VALUES (%s, %s) """ %(cat,code)
+						sql_insert_query = """ REPLACE INTO Category_product \
+                                           (categorie_id, product_code_bar) \
+                                           VALUES (%s, %s) """ %(cat,code)
 						result  = self.bd.cursor.execute(sql_insert_query)
 				
 			#print (self.bd.cursor.rowcount, "Record inserted successfully into cat_prod table")

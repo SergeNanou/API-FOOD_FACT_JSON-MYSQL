@@ -10,7 +10,7 @@ from substitut import *
 
 # Creating the interface object with the database:
 bd = GestionBD(GestionBD.host, GestionBD.database,
-    GestionBD.user, GestionBD.password, GestionBD.charset)
+               GestionBD.user, GestionBD.password, GestionBD.charset)
 if bd.echec:
     sys.exit()
 

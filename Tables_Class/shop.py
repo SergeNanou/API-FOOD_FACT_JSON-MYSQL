@@ -8,7 +8,9 @@ class Shop:
 		self.table = table
 	# Method to create a shop table
 	def create(self):
-		statement =  ['CREATE TABLE IF NOT EXISTS %s (id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY,name_shop VARCHAR(100) NOT NULL)']
+		statement =  ['CREATE TABLE IF NOT EXISTS %s \
+                      (id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT \
+                      PRIMARY KEY,name_shop VARCHAR(100) NOT NULL)']
 		
 		for sql_insert_query in statement:
 			if len(statement) > 0:
@@ -19,9 +21,11 @@ class Shop:
 		for elt in enumerate(liste_store):
 			records_to_insert.append(elt)
 		# request to insert a data in Shop table
-		sql_insert_query = """ REPLACE INTO Shop (id, name_shop) VALUES (%s,%s) """
+		sql_insert_query = """ REPLACE INTO Shop \
+                           (id, name_shop) VALUES (%s,%s) """
 		
    		#used executemany to insert 3 rows
-		result  = self.bd.cursor.executemany(sql_insert_query, records_to_insert)
+		result  = self.bd.cursor.executemany(sql_insert_query, 
+                                             records_to_insert)
    
 		#print (self.bd.cursor.rowcount, "Record inserted successfully into shop table")
