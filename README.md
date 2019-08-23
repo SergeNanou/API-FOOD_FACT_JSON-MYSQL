@@ -1,8 +1,8 @@
 # API-FOOD_FACT_JSON-MYSQL
-Ce projet a pour but de faire des requettes  avec l' API  Open Foodfact ,stocker les informations dans une BDD MYSQL et interagir ensuite avec la BDD.
+Ce projet a pour but  d'interroger la base de données du site Openfoodfact en utilisant son API  , stocker les informations dans une BDD MYSQL et interagir ensuite avec la BDD .
 
 # 1 - Organisation pour la realisation du projet
-Creation d'un tableau agile(TRELLO) et affectation  des deadlines.
+Creation d'un tableau agile(TRELLO) contennant le decoupage des taches du projet et des deadlines associées.
 
 # 2 - Construction de la base de données
 -Creation d'une base de données contennant 6 tables
