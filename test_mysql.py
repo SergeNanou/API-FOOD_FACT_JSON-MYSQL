@@ -19,7 +19,14 @@ def test_run_q_1(mysql_mock):
 @mock.patch('app.exec_mysql_2')
 def test_run_q_2(mysql_mock):
     run_q_2()
-    mysql_mock.assert_called_with('SELECT p.name_product, p.description, p.url,s.name_shop FROM Product p LEFT JOIN  Category_product AS cp ON  p.code_bar = cp.product_code_bar LEFT JOIN Category AS C ON c.id = cp.categorie_id LEFT JOIN  shop_product AS sp  ON  p.code_bar  =  sp.product_code_bar LEFT JOIN Shop AS s ON sp.shop_id = s.id  WHERE c.name_category = %s and  p.nutrition_score = %s ORDER BY RAND()', ('Pizza', 'a', ))
+    mysql_mock.assert_called_with('SELECT p.name_product, p.description, p.url,s.name_shop \
+                                   FROM Product p LEFT JOIN  Category_product AS cp ON  \
+                                   p.code_bar = cp.product_code_bar LEFT JOIN Category AS C ON\
+                                   c.id = cp.categorie_id LEFT JOIN  shop_product AS sp  ON\
+                                   p.code_bar  =  sp.product_code_bar LEFT JOIN Shop AS s ON\
+                                   sp.shop_id = s.id  WHERE c.name_category = %s and\
+                                   p.nutrition_score = %s ORDER BY RAND()'
+                                  , ('Pizza', 'a', ))
 @mock.patch('app.exec_mysql_3')
 def test_run_q_3(mysql_mock):
     run_q_3()
