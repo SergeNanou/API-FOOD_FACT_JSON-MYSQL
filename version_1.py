@@ -24,10 +24,10 @@ class MyFirstGUI:
         Label(self.Frame1, text="CHOIX DES CATEGORIES DE PRODUITS")\
         .pack(padx=10, pady=10)
         self.Frame3 = Frame(master, borderwidth=2, relief=GROOVE).place(x=320, y=290)
-        Label(self.Frame3, text="SUBSTITUTS NUTRI_SCORE A").place(x=320, y=290)
+        Label(self.Frame3, text="SUBSTITUTS ").place(x=320, y=290)
 
     
-
+        self.var_ch = ''
         # list choices buildings
         self.var_ch = StringVar()
 
@@ -82,15 +82,18 @@ class MyFirstGUI:
                     for a in range(len(self.my_result)):
                         
                         self.choice_prod.insert(a+1, self.my_result[a][0])
-
+                    #function to display selection
                     def test(event):
+                        self.s_5 = ''
+                        self.s_6 = ''
                         self.sub= ()
                         self.sub = self.choice_prod.curselection()
                         self.sub_0 = self.sub[0]
                     
                         self.canvas = Canvas(master, width=270, height=50)
                         self.canvas['bg']='green'
-                        self.canvas.text = self.canvas.create_text(110, 30, text=self.my_result[self.sub_0][0])
+                        self.canvas.text = self.canvas.create_text(110, 
+                                           30, text=self.my_result[self.sub_0][0])
                         self.canvas.place(x=270, y=230)  
                         sc_1 = 'a'
                         s_c_1 = 'b'
@@ -100,14 +103,16 @@ class MyFirstGUI:
                                   GestionBD.user, GestionBD.password, GestionBD.charset)
                         if bd.echec:
                             sys.exit()
-                        self.nut = "SELECT p.nutrition_score FROM Product p WHERE p.name_product=%s"
+                        self.nut = "SELECT p.nutrition_score FROM \
+                                    Product p WHERE p.name_product=%s"
 
                         bd.cursor.execute(self.nut, (self.my_result[self.sub_0][0],))
                         self.res_nut = bd.cursor.fetchmany()
                         self.res_nut = self.res_nut[0][0]
                         self.myresult_1 = []
                         self.my_res = []
-                        if (self.res_nut == 'c' or self.res_nut == 'd'or self.res_nut == 'e'):
+                        if (self.res_nut == 'c' or self.res_nut == 'd'
+                            or self.res_nut == 'e'):
 
                             self.display_subs = "SELECT p.name_product, p.description, \
                                         p.url,s.name_shop FROM Product p \
@@ -125,36 +130,50 @@ class MyFirstGUI:
                             # request execute
                             bd.cursor.execute(self.display_subs, (self.ch_s, sc_1, ))
                             # request result
-                            self.myresult_1 = bd.cursor.fetchmany(1)
+                            if bd.cursor.fetchmany(1)==[]:
 
-                            bd.cursor.execute(self.display_subs, (self.ch_s, s_c_1, ))
-                            self.my_res = bd.cursor.fetchmany(1)
+                                self.myresult_1 = bd.cursor.fetchmany(1)
+                            else:
+                                bd.cursor.execute(self.display_subs, (self.ch_s, s_c_1, )) 
+                                self.myresult_1 = bd.cursor.fetchmany(1)
                             
-
+                            print(self.myresult_1)
+                            # self.my_res = bd.cursor.fetchmany(1)
+                            
+                            # display result of selection
+                            # algorithm of selection
                             self.choice_prod_1 = Text(root, width=45,height=10)
                             self.choice_prod_1['bg']='ivory'
                             self.choice_prod_1.place(x=250, y=310)
-                            self.defilY = Scrollbar(master, orient='vertical',
-                                                    command=self.choice_prod_1.yview)
-                            self.defilY.place(x=610, y=310, height=165)
+                            # self.defilY = Scrollbar(master, orient='vertical',
+                            #                         command=self.choice_prod_1.yview)
+                            # self.defilY.place(x=610, y=310, height=165)
                             
-                            self.choice_prod_1['yscrollcommand'] = self.defilY.set
-                            self.choice_prod_1.insert('1.0','prod_score_a: '+ self.myresult_1[0][0]+'\n')
-                            self.choice_prod_1.insert('2.0','composition: '+ self.myresult_1[0][1]+'\n')
-                            self.choice_prod_1.insert('3.0','lien: '+ self.myresult_1[0][2]+'\n')
+                            # self.choice_prod_1['yscrollcommand'] = self.defilY.set
+                            self.choice_prod_1.insert('1.0','prod_score: '+ 
+                                                      self.myresult_1[0][0]+'\n')
+                            self.choice_prod_1.insert('2.0','composition: '+ 
+                                                      self.myresult_1[0][1]+'\n')
+                            self.choice_prod_1.insert('3.0','lien: '+ 
+                                                      self.myresult_1[0][2]+'\n')
+                            self.s_5 = ''
                             self.s_5 = self.myresult_1[0][3]
+                            print(self.s_5)
                             if self.myresult_1[0][3] == None:
                                 self.s_5 = ''
                             self.choice_prod_1.insert('4.0','Shop: '+ self.s_5 +'\n')
-                            self.choice_prod_1.insert('5.0','================================='+'\n')
-                            self.choice_prod_1.insert('6.0','prod_score_b: '+ self.my_res[0][0]+'\n')
-                            self.choice_prod_1.insert('7.0','composition: '+ self.my_res[0][1]+'\n')
-                            self.choice_prod_1.insert('8.0','lien: '+ self.my_res[0][2]+'\n')
-                            self.s_5 = self.my_res[0][3]
-                            if self.my_res[0][3] == None:
-                                self.s_5 = ''
-                            self.choice_prod_1.insert('9.0','Shop: '+ self.s_5)
-                            
+                            # self.choice_prod_1.insert('5.0',
+                            #                 '================================='+'\n')
+                            # self.choice_prod_1.insert('6.0','prod_score_b: '+ self.my_res[0][0]+'\n')
+                            # self.choice_prod_1.insert('7.0','composition: '+ self.my_res[0][1]+'\n')
+                            # self.choice_prod_1.insert('8.0','lien: '+ self.my_res[0][2]+'\n')
+                            # self.s_6 = ''
+                            # self.s_6 = self.my_res[0][3]
+                            # print(self.s_6)
+                            # if self.my_res[0][3] == None:
+                            #     self.s_6 = ''
+                            # self.choice_prod_1.insert('9.0','Shop: '+ self.s_6)
+                            # print('Shop: '+ self.s_6)
                         else:
                             self.display_subs = "SELECT p.name_product, p.description, \
                                         p.url,s.name_shop FROM Product p \
@@ -184,13 +203,13 @@ class MyFirstGUI:
                             self.choice_prod_1.insert('1.0','prod_score_a: '+ self.myresult_1[0][0]+'\n')
                             self.choice_prod_1.insert('2.0','composition: '+ self.myresult_1[0][1]+'\n')
                             self.choice_prod_1.insert('3.0','lien: '+ self.myresult_1[0][2]+'\n')
+                            
+                            self.s_5 = ''
                             self.s_5 = self.myresult_1[0][3]
+
                             if self.myresult_1[0][3] == None:
                                 self.s_5 = ''
-                            self.choice_prod_1.insert('4.0','Shop: '+ self.s_5)
-
-
-                        
+                            self.choice_prod_1.insert('4.0','Shop: '+ self.s_5) 
                         self.var_ch_1 = IntVar()
                         def cb():
                         
@@ -235,6 +254,7 @@ class MyFirstGUI:
             bd.baseDonn.commit()
             bd.cursor.close()
             bd.baseDonn.close()
+        # function to display a product substitut
         def save():
 
             # Creating the interface object with the database:
