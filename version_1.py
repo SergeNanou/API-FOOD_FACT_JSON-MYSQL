@@ -162,18 +162,7 @@ class MyFirstGUI:
                             if self.myresult_1[0][3] == None:
                                 self.s_5 = ''
                             self.choice_prod_1.insert('4.0','Shop: '+ self.s_5 +'\n')
-                            # self.choice_prod_1.insert('5.0',
-                            #                 '================================='+'\n')
-                            # self.choice_prod_1.insert('6.0','prod_score_b: '+ self.my_res[0][0]+'\n')
-                            # self.choice_prod_1.insert('7.0','composition: '+ self.my_res[0][1]+'\n')
-                            # self.choice_prod_1.insert('8.0','lien: '+ self.my_res[0][2]+'\n')
-                            # self.s_6 = ''
-                            # self.s_6 = self.my_res[0][3]
-                            # print(self.s_6)
-                            # if self.my_res[0][3] == None:
-                            #     self.s_6 = ''
-                            # self.choice_prod_1.insert('9.0','Shop: '+ self.s_6)
-                            # print('Shop: '+ self.s_6)
+                            
                         else:
                             self.display_subs = "SELECT p.name_product, p.description, \
                                         p.url,s.name_shop FROM Product p \
